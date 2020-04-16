@@ -9,7 +9,7 @@ Technologies stack:
   2) Spring Data jpa
   3) HSQL DB Embedded
   4) Spring MVC + Security
-  5)JUnit
+  5) JUnit
  
 There are also unit tests for each module + integration test for web module.
 
