@@ -18,7 +18,7 @@ import javax.annotation.PostConstruct;
 @PropertySource(
         value = "classpath:persistence.properties"
 )
-@ComponentScan(basePackages = {"repo","model"})
+@ComponentScan(basePackages = {"com.ilya.repo","com.ilya.model"})
 //otherwise you should set EntityManagerFactory && DataSource && TransactionManager manually
 @EnableAutoConfiguration
 public class App 
