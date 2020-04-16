@@ -36,6 +36,7 @@ public class MainControllerIntegrationTest {
 
     @org.junit.Before
     public void add(){
+        employeeService.deleteAll();
         List<Employee> list = addMockEmployee(10);
         employeeService.addAll(list);
     }
@@ -59,6 +60,7 @@ public class MainControllerIntegrationTest {
             Salary salary = new Salary();
             salary.setValue(1000 + i);
             employee.setSalary(salary);
+            salary.setEmployee(employee);
             res.add(employee);
         }
         return res;

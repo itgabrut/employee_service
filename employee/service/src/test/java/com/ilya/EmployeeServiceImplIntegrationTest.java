@@ -3,6 +3,7 @@ package com.ilya;
 import com.ilya.model.Employee;
 import com.ilya.model.Salary;
 import org.hamcrest.core.IsEqual;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class EmployeeServiceImplIntegrationTest {
 
     @Autowired
     private DataService employeeService;
+
+    @Before
+    public void clean(){
+        employeeService.deleteAll();
+    }
 
 
     @Test
@@ -50,6 +56,7 @@ public class EmployeeServiceImplIntegrationTest {
             Salary salary = new Salary();
             salary.setValue(1000 + i);
             employee.setSalary(salary);
+            salary.setEmployee(employee);
             res.add(employee);
         }
         return res;

@@ -32,12 +32,15 @@ public class DaoTest {
     @Test
     @Transactional
     public void getAllTest(){
+
+        repo.deleteAll();
         for(int i =0 ; i<3;i++){
             Employee employee = new Employee();
             employee.setName(String.format("Anton%d",i));
             Salary salary = new Salary();
             salary.setValue(1000 + i);
             employee.setSalary(salary);
+            salary.setEmployee(employee);
             entityManager.persist(employee);
         }
 
