@@ -4,6 +4,8 @@ import org.omg.CORBA.portable.IDLEntity;
 
 import javax.persistence.*;
 
+import java.util.Objects;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
@@ -21,9 +23,10 @@ public class Employee {
     private String name;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "salaryID" , referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee",orphanRemoval = true)
+//    @JoinColumn(name = "salaryID" , referencedColumnName = "id")
     private Salary salary;
+
 
 
     public Integer getId() {
@@ -49,5 +52,20 @@ public class Employee {
 
     public void setSalary(Salary salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(getId(), employee.getId()) && Objects.equals(getName(), employee.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName());
     }
 }
