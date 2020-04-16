@@ -30,13 +30,16 @@ public class DataService {
     }
 
     @Transactional
-    public void changeSalary(Employee employee){
+    public Employee changeSalary(Employee employee) {
         Optional<Employee> update = repo.findById(employee.getId());
-        update.get().setSalary(employee.getSalary());
+        Employee updated = update.get();
+        updated.getSalary().setValue(employee.getSalary().getValue());
+        return updated;
     }
 
-    public void addEmployee(Employee employee){
-        repo.save(employee);
+    public Employee addEmployee(Employee employee){
+        employee.getSalary().setEmployee(employee);
+        return repo.save(employee);
     }
     @Transactional
     public void addAll(Collection<Employee> employees){
